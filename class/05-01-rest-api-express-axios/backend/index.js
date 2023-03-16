@@ -1,6 +1,7 @@
 import express from 'express'
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+import cors from 'cors';
 import { options } from './swaggerOptions.js';
 import { checkValidationPhone, sendToSMS, getToken } from './phone.js';
 
@@ -11,9 +12,9 @@ const swaggerSpec = swaggerJsdoc(options);
 const app = express()
 const port = 3000
 
-
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(express.json());
+app.use(cors())
 app.get('/boards', (req, res) => {
   //1. 데이터를 조회하는 로직 => DB 에서 꺼내오기
   const result = [
