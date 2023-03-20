@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>회원가입연습</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  <script>
+    function test() {
+      //입력된 번호 가져오기
+      const pnum = document.getElementById('phoneNumber').value;
+      //axios 를 통해 서버로 던진다.
+      axios.post('http://localhost:3000/tokens/phone', {
+        pnum
+      }).then((result) => {
+        console.log(result);
+      }).catch((err) => {
+        console.log(err);
+      }); 
+      console.log('폰 번호: ', pnum);
+      // 핸드폰 번호로 요청하기
+    }
+  </script>
+</head>
+<body>
+  휴대폰번호 <input type="text" id="phoneNumber" />
+  <button onclick="test()">인증하기</button>
+  <div>
+    인증상태
+  </div>
+  <button>회원가입</button>
+</body>
+</html>
