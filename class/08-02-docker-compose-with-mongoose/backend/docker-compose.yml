@@ -5,6 +5,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+
+    volumes:
+      - ./index.js:/runningapp/index.js
     ports:
       - 3000:3000
   
