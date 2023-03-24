@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  my-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    volumes:
+      - ./index.js:/starbucksApi/index.js
+      - ./api/routes/:/starbucksApi/api/routes/
+    ports:
+      - 3000:3000
+
+  my-database:
+    image: mongo:5
+    volumes:
+      - ./mongodata:/data/db
+    ports:
+      - 27017:27017
