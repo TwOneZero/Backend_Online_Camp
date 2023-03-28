@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
+    <script src="index.js"></script>
+    <script src="menu.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <title>메뉴</title>
+  </head>
+  <body>
+    <div class="Container">
+      <div id="Wrapper">
+        <div
+          id="Navi_Wrapper"
+          style="width: 100%; display: flex; justify-content: space-between"
+        >
+          <a href="../login/index.html" class="Back_Button"> 🔙로그인 </a>
+          <a href="../user/index.html" class="Back_Button"> 유저정보🔜 </a>
+        </div>
+
+        <div id="Title_Wrapper">나만의 메뉴</div>
+        <div onclick="openMenu()" id="Open_Menu_Btn">메뉴 열기</div>
+        <div class="CloseBtnWrapper">
+          <span id="CloseBtn" onclick="closeMenu()">X</span>
+        </div>
+        <div id="Menu_Background"></div>
+      </div>
+    </div>
+  </body>
+</html>

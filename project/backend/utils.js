@@ -33,7 +33,7 @@ export const ogScrap = async (link) => {
         const content = $(el).attr('content')
         console.log(key, ' : ', content);
         //리턴할 객체에 저장
-        returnObj.key = content;
+        returnObj[`${key}`] = content;
       }
     })
     return returnObj;

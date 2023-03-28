@@ -5,10 +5,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-
     volumes:
       - ./index.js:/starbucksApi/index.js
-      - ./api/routes/:/starbucksApi/api/routes/
+      - ./api/.:/starbucksApi/api/.
     ports:
       - 3000:3000
 

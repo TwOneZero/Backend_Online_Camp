@@ -15,12 +15,9 @@ router.post('/phone', async (req, res, next) => {
       //저장된 번호가 있는 지 확인 
       const isPhone = await Token.findOne({ phone });
       if (isPhone) {
-        isPhone.token = token;
-        isPhone.isAuth = false;
-        await isPhone.save();
+        //기존 정보 삭제
+        await Token.deleteOne({ phone: phone });
       }
-      //문자 메시지 전송 
-      await sendTokenToSMS(phone, token);
       //토큰 정보 저장
       const tokenInfo = new Token({
         token,
@@ -28,6 +25,8 @@ router.post('/phone', async (req, res, next) => {
         isAuth: false
       })
       await tokenInfo.save();
+      //문자 메시지 전송 
+      await sendTokenToSMS(phone, token);
       return res.json({ message: '핸드폰으로 인증 문자가 전송되었습니다!' });
     }
   } catch (err) {
@@ -47,9 +46,10 @@ router.patch('/phone', async (req, res, next) => {
     const tokenInfo = await Token.findOne({ phone });
     //토큰 일치 하면 저장해주기
     if (tokenInfo?.token === token && tokenInfo?.isAuth === false) {
-      tokenInfo.isAuth = true;
-      await tokenInfo.save();
-      return res.status(200).json({ isAuth: true, message: '토큰 인증 완료!' });
+      await tokenInfo.updateOne({ isAuth: true }).then((result) => {
+        console.log(result);
+      })
+      return res.status(200).json({ message: '토큰 인증 완료!' });
     }
     return res.status(400).json({ isAuth: false, message: '토큰 인증 실패!' });
   } catch (error) {

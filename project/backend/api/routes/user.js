@@ -10,6 +10,7 @@ const router = express.Router();
 router.post('/', async (req, res, next) => {
   try {
     const { name, email, personal, prefer, pwd, phone } = req.body;
+    console.log(name, email, personal, prefer, pwd, phone);
     //토큰에 핸드폰 and isAuth = true 확인
     const userAuth = await Token.findOne({ phone });
     //번호가 없거나 isAuth =false 인 경우 error
@@ -21,35 +22,32 @@ router.post('/', async (req, res, next) => {
     if (scrapDatas.error) {
       return res.status(500).json({ error: 'Scrap Error', message: '스크랩 에러 발생' })
     }
-    const { title, description, image } = scrapDatas;
-    console.log(`${title}  ${description}  ${image}`);
-
-    //주민번호 뒷자리 별표로 변경
-    const backDigits = personal.split('-')[1];
-    const secretPersonal = personal.replaceAll(backDigits, '*******');
-
+    console.log(scrapDatas.title, scrapDatas.image, scrapDatas.description);
+    const per = res.data[0].personal.split('-');
+    const newPer = per[0].concat('-', '*******');
+    console.log(newPer);
     //DB 에 저장
     const user = new User({
       name,
       email,
-      secretPersonal,
+      personal: newPer,
       prefer,
       pwd,
       phone,
       og: {
-        title,
-        description,
-        image
+        'title': scrapDatas.title,
+        'description': scrapDatas.description,
+        'image': scrapDatas.image
       }
     })
     await user.save()
-      .then((result) => {
+      .then(async (result) => {
         //user를 db에 저장하면서 가입 환영 email 보냄
         if (checkValidationEmail(email)) {
           const template = getWelcomeTemplate(name, email);
-          sendTemplateToEmail(email, template);
+          await sendTemplateToEmail(email, template);
         }
-        return res.status(200).json(result._id);
+        return res.status(200).json(result);
       }).catch((err) => {
         console.log(err);
       });

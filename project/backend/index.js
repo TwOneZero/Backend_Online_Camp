@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 
 app.use('/user', userRouter);
 app.use('/token', tokenRouter);
-app.use('/starbucks', starbucksRouter);
+app.use('/', starbucksRouter);
 
 
 await mongoose.connect('mongodb://my-database:27017/starbucks').then(() => {
