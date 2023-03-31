@@ -1,0 +1,52 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Board {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Product {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Query {
+  getHello: String!
+  boards: [Board!]!
+  board(id: Int!): Board!
+  products: [Product!]!
+  product(id: Int!): Product!
+}
+
+type Mutation {
+  createBoard(createBoardInput: CreateBoardInput!): Board!
+  updateBoard(updateBoardInput: UpdateBoardInput!): Board!
+  removeBoard(id: Int!): Board!
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(updateProductInput: UpdateProductInput!): Product!
+  removeProduct(id: Int!): Product!
+}
+
+input CreateBoardInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateBoardInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateProductInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateProductInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
