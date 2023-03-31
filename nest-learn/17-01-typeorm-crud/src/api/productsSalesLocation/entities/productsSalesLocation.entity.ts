@@ -5,7 +5,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 @ObjectType()
 export class ProductsSalesLocation {
-  @Field(() => Int)
+  @Field(() => String)
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

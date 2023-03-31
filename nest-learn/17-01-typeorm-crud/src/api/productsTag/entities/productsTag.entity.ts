@@ -13,7 +13,9 @@ export class ProductsTag {
   @Field(() => String)
   tag: string;
 
-  @ManyToMany(() => Product, (products) => products.productsTags)
+  @ManyToMany(() => Product, (products) => products.productsTags, {
+    cascade: ['update'],
+  })
   @Field(() => [Product])
   products: Product[];
 }

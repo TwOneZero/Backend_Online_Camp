@@ -59,7 +59,9 @@ export class Product {
   @Field(() => User)
   user: User;
 
-  @ManyToMany(() => ProductsTag, (productsTags) => productsTags.products)
+  @ManyToMany(() => ProductsTag, (productsTags) => productsTags.products, {
+    cascade: ['update'],
+  })
   @JoinTable({
     name: 'product_product_tags',
     joinColumn: { name: 'product_id', referencedColumnName: 'id' },
