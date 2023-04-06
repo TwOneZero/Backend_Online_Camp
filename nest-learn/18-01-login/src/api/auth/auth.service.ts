@@ -1,11 +1,5 @@
-import {
-  Injectable,
-  UnauthorizedException,
-  UnprocessableEntityException,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { UserService } from '../users/user.service';
-import { UserLoginInput } from './dto/user-login-input.dto';
-import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt/dist';
 
 @Injectable()
@@ -15,24 +9,30 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async loginUser(userLoginInput: UserLoginInput) {
-    //1. 이메일로 유저 찾기
-    const user = await this.userService.findOne(userLoginInput.email);
-
-    //2. 없으면 -> Error
-    if (!user) {
-      throw new UnprocessableEntityException('유저가 존재하지 않음');
-    }
-
-    //3. 있는데 비번 틀림  -> Error
-    const isAuth = await bcrypt.compare(userLoginInput.password, user.password);
-    if (!isAuth) {
-      throw new UnauthorizedException('비밀번호가 일치하지 않습니다.');
-    }
-    //4. JWT 생성  -> 브라우저에 전달
-    const payload = { email: user.email, sub: user.id };
+  getAccessToken(payload, secretKey = 'secret', expires = '10s') {
     return this.jwtService.sign(payload, {
-      secret: 'secret',
+      secret: secretKey,
+      expiresIn: expires,
     });
+  }
+  setRefreshToken({ user, res }) {
+    const refreshToken = this.getAccessToken(
+      {
+        email: user.email,
+        sub: user.id,
+      },
+      'refreshKey',
+      '2w',
+    );
+    res.setHeader('Set-Cookie', `refreshToken=${refreshToken}`);
+
+    //배포 시에 response 헤더 세팅
+    /**
+     * res.setHeader('Acces-Control-Allow-Origin', 여기는 브라우저 주소)
+     * res.setHeader(
+     *  'Set-Cookie',
+     *  `refreshToken=${refreshToken}; paht=/; domain=여기는 백엔드 주소; SameSite=None; Secure; httpOnly;`
+     * )
+     */
   }
 }

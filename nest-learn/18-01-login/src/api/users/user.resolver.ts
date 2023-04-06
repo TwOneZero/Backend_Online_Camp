@@ -26,7 +26,7 @@ export class UserResolver {
   @Query(() => String)
   async fetchUser(@CurrentUser() curUser: any) {
     console.log('fetch user');
-    console.log(`User 정보 : ${curUser}`);
+    console.log(`User 정보 : ${{ email: curUser.email, sub: curUser.sub }}`);
 
     return 'fetch users';
   }

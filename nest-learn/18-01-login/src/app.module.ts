@@ -22,6 +22,7 @@ import { AuthModule } from './api/auth/auth.module';
       driver: ApolloDriver,
       //스키마 파일을 자동으로 생성해줌
       autoSchemaFile: 'src/commons/graphql/schema.gql',
+      context: ({ req, res }) => ({ req, res }),
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',

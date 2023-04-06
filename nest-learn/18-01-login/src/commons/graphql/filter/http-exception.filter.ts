@@ -13,12 +13,11 @@ export class HttpExceptionFilter implements ExceptionFilter {
     // const response = ctx.getResponse<Response>();
     const status = exception.getStatus();
     const message = exception.message;
+    const res = exception.getResponse();
 
     console.log('=====Error=====');
-    console.log('에러 내용 : ', message);
-    console.log('에러 코드 :', status);
-    console.log('===============');
-    const res = exception.getResponse();
     console.log(res);
+
+    console.log('===============');
   }
 }

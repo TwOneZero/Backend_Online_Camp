@@ -50,6 +50,7 @@ type Query {
   getHello: String!
   products: [Product!]!
   product(id: String!): Product!
+  fetchUser: String!
 }
 
 type Mutation {
@@ -59,6 +60,7 @@ type Mutation {
   createProductCategory(name: String!): ProductsCategory!
   signUp(createUserDto: CreateUserDto!): User!
   login(userLoginInput: UserLoginInput!): String!
+  restoreAccessToken: String!
 }
 
 input CreateProductInput {

@@ -1,6 +1,6 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
-export class JwtAccessStrategy extends PassportStrategy(Strategy, 'myGuard') {
+export class JwtAccessStrategy extends PassportStrategy(Strategy, 'access') {
   constructor() {
     //strategy 인가가 성공하면 validate 함수로 넘어감
     super({
