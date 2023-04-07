@@ -12,8 +12,8 @@ import { JwtService } from '@nestjs/jwt';
 import {
   GqlAuthGuard,
   GqlAuthRefreshGuard,
-} from 'src/commons/auth/gql-auth.guard';
-import { CurrentUser } from 'src/commons/auth/gql-user-param.decorator';
+} from 'src/common/auth/gql-auth.guard';
+import { CurrentUser } from 'src/common/auth/gql-user-param.decorator';
 
 @Resolver()
 export class AuthResolver {

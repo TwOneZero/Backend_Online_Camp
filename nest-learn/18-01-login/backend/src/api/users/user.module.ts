@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { UserResolver } from './user.resolver';
 import { UserService } from './user.service';
-import { JwtAccessStrategy } from 'src/commons/auth/jwt-access.strategy';
+import { JwtAccessStrategy } from 'src/common/auth/jwt-access.strategy';
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
   providers: [
