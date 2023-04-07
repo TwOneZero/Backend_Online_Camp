@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.nest
+    ports:
+      - 3000:3000
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DB: sociallogin
+
+  mysql:
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sociallogin
+volumes:
+  mysql:
