@@ -18,10 +18,8 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - mysql:/var/lib/mysql
+      - ./mysql:/var/lib/mysql
     environment:
       MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: sociallogin
-volumes:
-  mysql:

@@ -3,3 +3,6 @@ node_modules
 
 #environment
 .env
+
+#google cloud storage key file
+gcp-file-storage.json

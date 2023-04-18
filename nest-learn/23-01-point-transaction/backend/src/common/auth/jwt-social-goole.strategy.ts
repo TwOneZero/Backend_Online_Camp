@@ -1,15 +1,16 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-google-oauth20';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export class JwtGoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor() {
     //strategy 인가가 성공하면 validate 함수로 넘어감
     super({
       //아이디 비밀번호
-      clientID:
-        '289678496894-6qlt6gmcun0e919rrrh3qpbj5a3bd2t7.apps.googleusercontent.com',
-      clientSecret: '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',
-      callbackURL: 'http://localhost:3000/auth/login/google',
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: process.env.GOOGLE_CALLBACK,
       scope: ['email', 'profile'],
     });
   }

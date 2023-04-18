@@ -16,6 +16,7 @@ export class JwtRefreshStrategy extends PassportStrategy(Strategy, 'refresh') {
         cookieString.forEach((el) => {
           if (el.includes('refreshToken')) {
             refreshToken = el.replace('refreshToken=', '');
+            return;
           }
         });
         console.log(refreshToken);

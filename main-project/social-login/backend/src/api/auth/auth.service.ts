@@ -11,7 +11,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  getAccessToken(payload, secretKey = 'secret', expires = '10s') {
+  getAccessToken(payload, secretKey = 'secret', expires = '1h') {
     return this.jwtService.sign(payload, {
       secret: secretKey,
       expiresIn: expires,
@@ -26,7 +26,7 @@ export class AuthService {
       'refreshKey',
       '2w',
     );
-    res.setHeader('Set-Cookie', `refreshToken=${refreshToken};, paht=/;`); //path 설정필요 (소셜로그인에서)
+    res.setHeader('Set-Cookie', `refreshToken=${refreshToken};, path=/;`); //path 설정필요 (소셜로그인에서)
 
     //배포 시에 response 헤더 세팅
     /**
