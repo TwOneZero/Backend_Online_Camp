@@ -1,0 +1,123 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ProductsCategory {
+  id: String!
+  name: String!
+}
+
+type ProductsSalesLocation {
+  id: String!
+  address: String!
+  addressDetail: String!
+  lat: Float!
+  lng: Float!
+  meetingTime: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type ProductsTag {
+  id: String!
+  tag: String!
+  products: [Product!]!
+}
+
+type User {
+  id: String!
+  email: String!
+  name: String!
+  age: Int!
+  point: Int!
+}
+
+type Product {
+  id: String!
+  name: String!
+  description: String!
+  price: Int!
+  isSoldout: Boolean!
+  productsSalesLocation: ProductsSalesLocation!
+  productsCategory: ProductsCategory!
+  user: User!
+  productsTags: [ProductsTag!]!
+}
+
+type PointTransaction {
+  id: String!
+  impUid: String!
+  amount: Int!
+  status: POINT_TRANSACTION_STATUS_ENUM!
+  user: User!
+  createdAt: DateTime!
+}
+
+enum POINT_TRANSACTION_STATUS_ENUM {
+  PAYMENT
+  CANCEL
+}
+
+type Query {
+  getHello: String!
+  products: [Product!]!
+  product(id: String!): Product!
+  fetchUser: String!
+}
+
+type Mutation {
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(updateProductInput: UpdateProductInput!): Product!
+  removeProduct(id: String!): Boolean!
+  createProductCategory(name: String!): ProductsCategory!
+  signUp(createUserDto: CreateUserDto!): User!
+  login(userLoginInput: UserLoginInput!): String!
+  restoreAccessToken: String!
+  createPointTransaction(impUid: String!, amount: Float!): PointTransaction!
+  uploadFile(files: [Upload!]!): [String!]!
+}
+
+input CreateProductInput {
+  name: String!
+  description: String!
+  price: Int!
+  productsSalesLocationInfo: ProductsSalesLocationInput!
+  productsCategoryId: String!
+  productsTags: [String!]!
+}
+
+input ProductsSalesLocationInput {
+  address: String!
+  addressDetail: String!
+  lat: Float!
+  lng: Float!
+  meetingTime: DateTime!
+}
+
+input UpdateProductInput {
+  name: String
+  description: String
+  price: Int
+  productsSalesLocationInfo: ProductsSalesLocationInput
+  productsCategoryId: String
+  productsTags: [String!]
+  id: String!
+}
+
+input CreateUserDto {
+  email: String!
+  name: String!
+  age: Int!
+  password: String!
+}
+
+input UserLoginInput {
+  email: String!
+  password: String!
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
