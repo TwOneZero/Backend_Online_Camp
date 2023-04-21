@@ -4,5 +4,9 @@ node_modules
 #environment
 .env
 
-#google cloud storage key file
+#google cloud key files
 gcp-file-storage.json
+gcp-bigquery.json
+
+#db-data
+mysql-data

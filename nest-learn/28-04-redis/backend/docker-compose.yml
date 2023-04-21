@@ -1,0 +1,34 @@
+version: '3'
+services:
+  nest:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nest_app
+
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/var/app
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydocker03
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+  redis:
+    image: redis
+    container_name: redis_cache
+    restart: always
+    ports:
+      - 6379:6379
