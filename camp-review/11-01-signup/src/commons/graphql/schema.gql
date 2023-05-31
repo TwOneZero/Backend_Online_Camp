@@ -1,0 +1,20 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: String!
+  email: String!
+  name: String!
+  age: Int!
+}
+
+type Query {
+  fetchUser: String!
+}
+
+type Mutation {
+  createUser(email: String!, password: String!, name: String!, age: Int!): User!
+  login(email: String!, password: String!): String!
+  restoreAcessToken: String!
+}

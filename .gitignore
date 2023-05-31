@@ -3,6 +3,7 @@ node_modules
 
 #environment
 .env
+.env.docker
 
 #google cloud key files
 gcp-file-storage.json
