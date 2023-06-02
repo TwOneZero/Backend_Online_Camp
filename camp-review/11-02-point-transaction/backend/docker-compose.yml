@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  # nest:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: nest_app_v1
+
+  #   restart: always
+  #   ports:
+  #     - 3000:3000
+  #   volumes:
+  #     - ./src:/myapp/src
+  #   env_file:
+  #     - ./.env.docker
+  #   depends_on:
+  #     - my-db
+
+  my-db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE_NAME}
+    ports:
+      - 3306:3306
+    # volumes:
+    #   - ./mysql-data:/var/lib/mysql
